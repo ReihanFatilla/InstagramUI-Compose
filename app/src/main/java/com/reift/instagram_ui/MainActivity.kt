@@ -95,7 +95,7 @@ fun BottomNavigationBar(
                     onItemClick(it)
                 },
                 selectedContentColor = Color.Black,
-                unselectedContentColor = Color.DarkGray,
+                unselectedContentColor = Color.LightGray,
                 icon = {
                     Icon(imageVector = it.icon, contentDescription = null)
                 }

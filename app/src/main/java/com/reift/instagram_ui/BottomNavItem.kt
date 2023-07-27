@@ -18,7 +18,7 @@ data class BottomNavItem(
         val listNavItem = listOf(
             BottomNavItem(ROUTE_HOME, Icons.Default.Home),
             BottomNavItem(ROUTE_EXPLORE, Icons.Default.Search),
-            BottomNavItem(ROUTE_POST, Icons.Default.Send),
+            BottomNavItem(ROUTE_POST, Icons.Default.Add),
             BottomNavItem(ROUTE_REELS, Icons.Default.PlayArrow),
             BottomNavItem(ROUTE_PROFILE, Icons.Default.Person)
         )
