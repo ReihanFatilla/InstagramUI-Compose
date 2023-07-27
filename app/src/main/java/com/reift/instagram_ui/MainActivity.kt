@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Icon
@@ -56,7 +57,7 @@ fun MainScreen() {
 @Composable
 fun Navigation(navController: NavHostController) {
     NavHost(navController = navController, startDestination = BottomNavItem.ROUTE_HOME) {
-        val modifier = Modifier.fillMaxSize()
+        val modifier = Modifier.fillMaxSize().padding(horizontal = 16.dp, vertical = 16.dp)
         composable(BottomNavItem.ROUTE_HOME) {
             HomeScreen(modifier)
         }
