@@ -19,6 +19,7 @@ fun HomeScreen(
     Column(modifier = modifier) {
         HomeTopBar()
         StorySection()
+        FeedsSection()
     }
 }
 

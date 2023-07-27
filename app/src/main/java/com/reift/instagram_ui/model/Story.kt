@@ -1,13 +1,22 @@
 package com.reift.instagram_ui.model
 
+import com.reift.instagram_ui.data.Dummy
+
 data class Story(
     val username: String,
-    val profileUrl: String
-){
+    val profileUrl: String,
+) {
     companion object {
-        val listStory = arrayListOf<Story>().also{ list ->
-            repeat(10){
-                list.add(Story("reihanfatilla", "https://static.vecteezy.com/system/resources/previews/014/480/066/non_2x/man-avatar-icon-flat-style-vector.jpg"))
+        val listStory = arrayListOf<Story>().also { list ->
+            repeat(10) {
+                with(Dummy) {
+                    list.add(
+                        Story(
+                            username = username.shuffled()[0],
+                            profileUrl = profileUrl.shuffled()[0]
+                        )
+                    )
+                }
             }
         }
     }
