@@ -1,4 +1,4 @@
-package com.reift.instagram_ui.home
+package com.reift.instagram_ui.screen.home
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Icon

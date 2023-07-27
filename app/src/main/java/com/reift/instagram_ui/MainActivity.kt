@@ -19,11 +19,12 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.reift.instagram_ui.explore.ExploreScreen
-import com.reift.instagram_ui.home.HomeScreen
-import com.reift.instagram_ui.post.PostScreen
-import com.reift.instagram_ui.profile.ProfileScreen
-import com.reift.instagram_ui.reels.ReelsScreen
+import com.reift.instagram_ui.screen.explore.ExploreScreen
+import com.reift.instagram_ui.screen.home.HomeScreen
+import com.reift.instagram_ui.model.BottomNavItem
+import com.reift.instagram_ui.screen.post.PostScreen
+import com.reift.instagram_ui.screen.profile.ProfileScreen
+import com.reift.instagram_ui.screen.reels.ReelsScreen
 import com.reift.instagram_ui.ui.theme.InstagramUITheme
 
 class MainActivity : ComponentActivity() {

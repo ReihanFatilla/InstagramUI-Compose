@@ -1,4 +1,4 @@
-package com.reift.instagram_ui
+package com.reift.instagram_ui.model
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*

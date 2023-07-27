@@ -1,4 +1,4 @@
-package com.reift.instagram_ui.profile
+package com.reift.instagram_ui.screen.explore
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -9,22 +9,22 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import com.reift.instagram_ui.home.HomeScreen
+import com.reift.instagram_ui.screen.home.HomeScreen
 import com.reift.instagram_ui.ui.theme.InstagramUITheme
 
 @Composable
-fun ProfileScreen(modifier: Modifier) {
+fun ExploreScreen(modifier: Modifier) {
     Column(modifier = modifier) {
         Box(modifier = modifier, contentAlignment = Alignment.Center) {
-            Text(text = "Profile", textAlign = TextAlign.Center)
+            Text(text = "Explore", textAlign = TextAlign.Center)
         }
     }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun ProfilePreview() {
+fun ExplorePreview() {
     InstagramUITheme {
-        ProfileScreen(modifier = Modifier.fillMaxSize())
+        ExploreScreen(modifier = Modifier.fillMaxSize())
     }
 }
