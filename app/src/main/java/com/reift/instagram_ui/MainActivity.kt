@@ -3,6 +3,7 @@ package com.reift.instagram_ui
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Icon
@@ -19,6 +20,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.reift.instagram_ui.explore.ExploreScreen
 import com.reift.instagram_ui.home.HomeScreen
+import com.reift.instagram_ui.post.PostScreen
 import com.reift.instagram_ui.profile.ProfileScreen
 import com.reift.instagram_ui.reels.ReelsScreen
 import com.reift.instagram_ui.ui.theme.InstagramUITheme
@@ -54,20 +56,21 @@ fun MainScreen() {
 @Composable
 fun Navigation(navController: NavHostController) {
     NavHost(navController = navController, startDestination = BottomNavItem.ROUTE_HOME) {
+        val modifier = Modifier.fillMaxSize()
         composable(BottomNavItem.ROUTE_HOME) {
-            HomeScreen()
+            HomeScreen(modifier)
         }
         composable(BottomNavItem.ROUTE_EXPLORE) {
-            ExploreScreen()
+            ExploreScreen(modifier)
         }
         composable(BottomNavItem.ROUTE_POST) {
-            ProfileScreen()
+            PostScreen(modifier)
         }
         composable(BottomNavItem.ROUTE_REELS) {
-            ReelsScreen()
+            ReelsScreen(modifier)
         }
         composable(BottomNavItem.ROUTE_PROFILE) {
-            ProfileScreen()
+            ProfileScreen(modifier)
         }
     }
 }
