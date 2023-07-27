@@ -1,9 +1,10 @@
 package com.reift.instagram_ui
 
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.*
 import androidx.compose.ui.graphics.vector.ImageVector
 
 data class BottomNavItem(
-    val title: String,
     val route: String,
     val icon: ImageVector
 ){
@@ -13,5 +14,13 @@ data class BottomNavItem(
         const val ROUTE_POST = "route_post"
         const val ROUTE_REELS = "route_reels"
         const val ROUTE_PROFILE = "route_profile"
+
+        val listNavItem = listOf(
+            BottomNavItem(ROUTE_HOME, Icons.Default.Home),
+            BottomNavItem(ROUTE_EXPLORE, Icons.Default.Search),
+            BottomNavItem(ROUTE_POST, Icons.Default.Send),
+            BottomNavItem(ROUTE_REELS, Icons.Default.PlayArrow),
+            BottomNavItem(ROUTE_PROFILE, Icons.Default.Person)
+        )
     }
 }
