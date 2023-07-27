@@ -58,7 +58,7 @@ fun MainScreen() {
 @Composable
 fun Navigation(navController: NavHostController) {
     NavHost(navController = navController, startDestination = BottomNavItem.ROUTE_HOME) {
-        val modifier = Modifier.fillMaxSize().padding(horizontal = 16.dp, vertical = 16.dp)
+        val modifier = Modifier.fillMaxSize().padding(16.dp)
         composable(BottomNavItem.ROUTE_HOME) {
             HomeScreen(modifier)
         }
