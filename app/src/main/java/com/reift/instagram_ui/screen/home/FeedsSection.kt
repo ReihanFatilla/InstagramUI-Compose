@@ -20,6 +20,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
@@ -36,7 +37,7 @@ import com.webtoonscorp.android.readmore.material.ReadMoreText
 @Composable
 fun FeedsSection(post: Post) {
     val modifier = Modifier.fillMaxWidth()
-    Column(verticalArrangement = Arrangement.spacedBy(8.dp), modifier = modifier) {
+    Column(verticalArrangement = Arrangement.spacedBy(8.dp), modifier = modifier.padding(horizontal = 16.dp)) {
         FeedsHeader(post = post, modifier = modifier)
         FeedsContent(post = post, modifier = modifier)
         FeedsFooter(post = post, modifier = modifier)
@@ -105,7 +106,9 @@ fun FeedsContent(post: Post, modifier: Modifier) {
         modifier = Modifier
             .fillMaxWidth()
             .aspectRatio(1.5f)
-            .background(Color.Black))
+            .background(Color.Black),
+    contentScale = ContentScale.Crop
+    )
     Row(horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically,
         modifier = modifier) {
@@ -125,7 +128,8 @@ fun FeedsContent(post: Post, modifier: Modifier) {
 fun FeedsHeader(modifier: Modifier, post: Post) {
     Row(horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically,
-        modifier = modifier) {
+        modifier = modifier
+    ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
             Image(
                 painter = rememberAsyncImagePainter(model = post.profileUrl),

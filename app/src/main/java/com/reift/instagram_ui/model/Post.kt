@@ -12,7 +12,7 @@ data class Post(
 ) {
     companion object {
         val listPost = arrayListOf<Post>().also { list ->
-            repeat(15) {
+            repeat(35) {
                 with(Dummy) {
                     list.add(
 

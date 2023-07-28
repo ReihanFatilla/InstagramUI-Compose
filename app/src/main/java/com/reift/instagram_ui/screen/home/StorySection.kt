@@ -24,7 +24,7 @@ import com.reift.instagram_ui.model.Story
 
 @Composable
 fun StorySection() {
-    LazyRow(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
+    LazyRow(horizontalArrangement = Arrangement.spacedBy(16.dp), contentPadding = PaddingValues(horizontal = 16.dp)) {
         items(Story.listStory) { story ->
             Column(modifier = Modifier.width(90.dp)) {
                 Image(

@@ -35,7 +35,6 @@ fun HomePreview() {
     InstagramUITheme {
         HomeScreen(modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp)
             .clipToBounds()
         )
     }
