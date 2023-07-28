@@ -59,6 +59,7 @@ fun FeedsFooter(post: Post, modifier: Modifier) {
             }
         },
             expanded = false,
+            softWrap = true,
             readMoreStyle = SpanStyle(color = Color.Gray),
             readMoreText = "more",
             readMoreMaxLines = 1
