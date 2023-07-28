@@ -14,15 +14,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
+import com.reift.instagram_ui.model.Post
 import com.reift.instagram_ui.model.Story
 
 @Composable
 fun StorySection() {
-    Spacer(modifier = Modifier.height(16.dp))
     LazyRow(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
         items(Story.listStory) { story ->
             Column(modifier = Modifier.width(90.dp)) {
@@ -43,6 +44,7 @@ fun StorySection() {
                     fontSize = 13.sp,
                     color = Color.Black,
                     maxLines = 1,
+                    fontWeight = FontWeight.Bold,
                     overflow = TextOverflow.Ellipsis,
                     modifier = Modifier
                         .padding(8.dp)

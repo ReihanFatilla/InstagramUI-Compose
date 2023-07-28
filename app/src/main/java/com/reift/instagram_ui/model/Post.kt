@@ -21,8 +21,8 @@ data class Post(
                             username = username.shuffled()[0],
                             imageUrl = imageUrl.shuffled()[0],
                             profileUrl = profileUrl.shuffled()[0],
-                            tags = tags.shuffled().take((0..3).random()),
-                            likedBy = Story.listStory.shuffled().take((0..3).random())
+                            tags = tags.shuffled().take(3),
+                            likedBy = Story.listStory.shuffled().take((1..3).random())
                         )
                     )
                 }
