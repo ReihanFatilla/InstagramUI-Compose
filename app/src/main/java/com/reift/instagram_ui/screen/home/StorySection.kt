@@ -41,7 +41,7 @@ fun StorySection() {
 
                 )
                 Text(text = story.username,
-                    fontSize = 13.sp,
+                    fontSize = 12.sp,
                     color = Color.Black,
                     maxLines = 1,
                     fontWeight = FontWeight.Bold,

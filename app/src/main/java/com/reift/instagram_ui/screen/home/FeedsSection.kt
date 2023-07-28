@@ -14,6 +14,8 @@ import androidx.compose.material.icons.outlined.Email
 import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material.icons.outlined.Share
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -29,6 +31,7 @@ import coil.compose.rememberAsyncImagePainter
 import com.reift.instagram_ui.model.Post
 import com.reift.instagram_ui.ui.theme.InstagramUITheme
 import com.webtoonscorp.android.readmore.foundation.BasicReadMoreText
+import com.webtoonscorp.android.readmore.material.ReadMoreText
 
 @Composable
 fun FeedsSection(post: Post) {
@@ -42,14 +45,14 @@ fun FeedsSection(post: Post) {
 
 @Composable
 fun FeedsFooter(post: Post, modifier: Modifier) {
+    val (expanded, onExpandedChange) = rememberSaveable { mutableStateOf(false) }
     LikedByRow(modifier, post)
-    Row(modifier = modifier.padding(end = 64.dp)) {
-        BasicReadMoreText(text = run {
+    Row(modifier = modifier.padding(end = 32.dp)) {
+        ReadMoreText(text = run {
             buildAnnotatedString {
                 withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
                     append(post.username)
                 }
-
                 append(" ${post.caption}\n")
                 post.tags.forEach {
                     withStyle(style = SpanStyle(color = Color.Blue)) {
@@ -58,10 +61,12 @@ fun FeedsFooter(post: Post, modifier: Modifier) {
                 }
             }
         },
-            expanded = false,
             softWrap = true,
             readMoreStyle = SpanStyle(color = Color.Gray),
             readMoreText = "more",
+            fontSize = 12.sp,
+            expanded = expanded,
+            onExpandedChange = onExpandedChange,
             readMoreMaxLines = 1
         )
     }
