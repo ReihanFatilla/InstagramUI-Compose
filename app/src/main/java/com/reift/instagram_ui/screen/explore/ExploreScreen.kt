@@ -44,6 +44,23 @@ fun ExploreScreen(modifier: Modifier) {
                 )
             )
         }
+
+        item {
+            FlowRow {
+                Post.listPost.map { it.imageUrl }.forEach { imageUrl ->
+                    Image(
+                        painter = rememberAsyncImagePainter(model = imageUrl),
+                        contentDescription = null,
+                        modifier = Modifier
+                            .fillMaxWidth(0.333f)
+                            .aspectRatio(1f)
+                            .padding(1.dp)
+                            .background(Color.Black),
+                        contentScale = ContentScale.Crop
+                    )
+                }
+            }
+        }
     }
 }
 
