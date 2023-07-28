@@ -59,7 +59,7 @@ fun FeedsFooter(post: Post, modifier: Modifier) {
             }
         },
             expanded = false,
-            readMoreStyle = SpanStyle(color = Color.LightGray),
+            readMoreStyle = SpanStyle(color = Color.Gray),
             readMoreText = "more",
             readMoreMaxLines = 1
         )
@@ -73,12 +73,12 @@ fun LikedByRow(modifier: Modifier, post: Post) {
     Row(modifier = modifier, horizontalArrangement = Arrangement.spacedBy(4.dp)) {
         Box(modifier = Modifier.width((20 + (10 * (post.likedBy.size - 1))).dp)) {
             post.likedBy.forEachIndexed { index, story ->
-                Image(painter = rememberAsyncImagePainter(model = story.profileUrl),
+                Image(
+                    painter = rememberAsyncImagePainter(model = story.profileUrl),
                     contentDescription = null,
                     modifier = Modifier
                         .size(20.dp)
                         .offset(x = (10 * (index)).dp)
-                        .clip(CircleShape)
                         .clip(CircleShape)
                         .border(2.dp, Color.White, CircleShape)
                         .background(Color.Black)
@@ -86,7 +86,7 @@ fun LikedByRow(modifier: Modifier, post: Post) {
             }
         }
         Text(text = "Liked by", fontWeight = FontWeight.Normal, fontSize = 12.sp)
-        Text(text = post.likedBy[0].username, fontWeight = FontWeight.Bold, fontSize = 12.sp)
+        Text(text = post.likedBy.first().username, fontWeight = FontWeight.Bold, fontSize = 12.sp)
         Text(text = "and", fontWeight = FontWeight.Normal, fontSize = 12.sp)
         Text(text = "others", fontWeight = FontWeight.Bold, fontSize = 12.sp)
     }
