@@ -18,13 +18,17 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
 import com.reift.instagram_ui.model.Post
 import com.reift.instagram_ui.ui.theme.InstagramUITheme
+import com.webtoonscorp.android.readmore.foundation.BasicReadMoreText
 
 @Composable
 fun FeedsSection(post: Post) {
@@ -33,14 +37,41 @@ fun FeedsSection(post: Post) {
         FeedsHeader(post = post, modifier = modifier)
         FeedsContent(post = post, modifier = modifier)
         FeedsFooter(post = post, modifier = modifier)
-        Spacer(modifier = Modifier.height(8.dp))
     }
 }
 
 @Composable
 fun FeedsFooter(post: Post, modifier: Modifier) {
+    LikedByRow(modifier, post)
+    Row(modifier = modifier.padding(end = 64.dp)) {
+        BasicReadMoreText(text = run {
+            buildAnnotatedString {
+                withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
+                    append(post.username)
+                }
+
+                append(" ${post.caption}\n")
+                post.tags.forEach {
+                    withStyle(style = SpanStyle(color = Color.Blue)) {
+                        append("#$it ")
+                    }
+                }
+            }
+        },
+            expanded = false,
+            readMoreStyle = SpanStyle(color = Color.LightGray),
+            readMoreText = "more",
+            readMoreMaxLines = 1
+        )
+    }
+
+    Spacer(modifier = Modifier.height(8.dp))
+}
+
+@Composable
+fun LikedByRow(modifier: Modifier, post: Post) {
     Row(modifier = modifier, horizontalArrangement = Arrangement.spacedBy(4.dp)) {
-        Box(modifier = Modifier.width((20+(10*(post.likedBy.size-1))).dp)) {
+        Box(modifier = Modifier.width((20 + (10 * (post.likedBy.size - 1))).dp)) {
             post.likedBy.forEachIndexed { index, story ->
                 Image(painter = rememberAsyncImagePainter(model = story.profileUrl),
                     contentDescription = null,
@@ -100,7 +131,10 @@ fun FeedsHeader(modifier: Modifier, post: Post) {
                     .background(Color.Black)
             )
             Spacer(modifier = Modifier.width(8.dp))
-            Text(text = post.username, fontSize = 14.sp, color = Color.Black, fontWeight = FontWeight.Bold)
+            Text(text = post.username,
+                fontSize = 13.sp,
+                color = Color.Black,
+                fontWeight = FontWeight.Bold)
         }
         Icon(imageVector = Icons.Default.Menu, contentDescription = null)
     }
@@ -110,6 +144,6 @@ fun FeedsHeader(modifier: Modifier, post: Post) {
 @Composable
 fun FeedsPreview() {
     InstagramUITheme {
-
+        FeedsSection(post = Post.listPost.random())
     }
 }

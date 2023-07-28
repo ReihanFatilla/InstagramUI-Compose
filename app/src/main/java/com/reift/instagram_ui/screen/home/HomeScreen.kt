@@ -15,7 +15,7 @@ import com.reift.instagram_ui.ui.theme.InstagramUITheme
 fun HomeScreen(
     modifier: Modifier
 ){
-    LazyColumn(verticalArrangement = Arrangement.spacedBy(16.dp)) {
+    LazyColumn(verticalArrangement = Arrangement.spacedBy(16.dp), modifier = modifier) {
         item{
             HomeTopBar()
         }
