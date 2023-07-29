@@ -1,6 +1,7 @@
 package com.reift.instagram_ui.screen.home
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
@@ -13,17 +14,20 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
-@Composable()
-fun HomeTopBar() {
-    Row(modifier = Modifier.fillMaxWidth().padding(start = 16.dp, end = 16.dp, top = 16.dp),
-        horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Text(text = "Instagram", fontSize = 20.sp, color = Color.Black)
-        Row {
-            Icon(imageVector = Icons.Outlined.FavoriteBorder, contentDescription = null)
-            Spacer(modifier = Modifier.width(16.dp))
-            Icon(imageVector = Icons.Outlined.Send, contentDescription = null)
+fun LazyListScope.HomeTopBar() {
+    item {
+        Row(modifier = Modifier
+            .fillMaxWidth()
+            .padding(start = 16.dp, end = 16.dp, top = 16.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(text = "Instagram", fontSize = 20.sp, color = Color.Black)
+            Row {
+                Icon(imageVector = Icons.Outlined.FavoriteBorder, contentDescription = null)
+                Spacer(modifier = Modifier.width(16.dp))
+                Icon(imageVector = Icons.Outlined.Send, contentDescription = null)
+            }
         }
     }
 }

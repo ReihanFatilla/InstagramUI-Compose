@@ -4,6 +4,9 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListScope
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
@@ -31,16 +34,17 @@ import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
 import com.reift.instagram_ui.model.Post
 import com.reift.instagram_ui.ui.theme.InstagramUITheme
-import com.webtoonscorp.android.readmore.foundation.BasicReadMoreText
 import com.webtoonscorp.android.readmore.material.ReadMoreText
 
-@Composable
-fun FeedsSection(post: Post) {
-    val modifier = Modifier.fillMaxWidth()
-    Column(verticalArrangement = Arrangement.spacedBy(8.dp), modifier = modifier.padding(horizontal = 16.dp)) {
-        FeedsHeader(post = post, modifier = modifier)
-        FeedsContent(post = post, modifier = modifier)
-        FeedsFooter(post = post, modifier = modifier)
+fun LazyListScope.FeedsSection() {
+    items(Post.listPost) { post ->
+        val modifier = Modifier.fillMaxWidth()
+        Column(verticalArrangement = Arrangement.spacedBy(8.dp),
+            modifier = modifier.padding(horizontal = 16.dp)) {
+            FeedsHeader(post = post, modifier = modifier)
+            FeedsContent(post = post, modifier = modifier)
+            FeedsFooter(post = post, modifier = modifier)
+        }
     }
 }
 
@@ -107,7 +111,7 @@ fun FeedsContent(post: Post, modifier: Modifier) {
             .fillMaxWidth()
             .aspectRatio(1.5f)
             .background(Color.Black),
-    contentScale = ContentScale.Crop
+        contentScale = ContentScale.Crop
     )
     Row(horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically,
@@ -154,6 +158,8 @@ fun FeedsHeader(modifier: Modifier, post: Post) {
 @Composable
 fun FeedsPreview() {
     InstagramUITheme {
-        FeedsSection(post = Post.listPost.random())
+        LazyColumn(modifier = Modifier.fillMaxSize()) {
+            FeedsSection()
+        }
     }
 }
