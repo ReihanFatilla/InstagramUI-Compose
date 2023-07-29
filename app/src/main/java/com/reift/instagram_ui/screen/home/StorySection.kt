@@ -24,12 +24,12 @@ import com.reift.instagram_ui.model.Story
 
 fun LazyListScope.StorySection() {
     item {
-        StoryLazyRow(listStory = Story.listStory, profileSize = 90, fontSize = 12)
+        StoryLazyRow(listStory = Story.listStory, profileSize = 90, fontSize = 12, isActive = true)
     }
 }
 
 @Composable
-fun StoryLazyRow(listStory: List<Story>,profileSize: Int, fontSize: Int){
+fun StoryLazyRow(listStory: List<Story>, profileSize: Int, fontSize: Int, isActive: Boolean){
     LazyRow(horizontalArrangement = Arrangement.spacedBy(16.dp),
         contentPadding = PaddingValues(horizontal = 16.dp)) {
         items(listStory) { story ->
@@ -41,7 +41,7 @@ fun StoryLazyRow(listStory: List<Story>,profileSize: Int, fontSize: Int){
                         .fillMaxWidth()
                         .aspectRatio(1f)
                         .clip(CircleShape)
-                        .border(2.dp, Color.Red, CircleShape)
+                        .border(2.dp, if(isActive) Color.Red else Color.LightGray, CircleShape)
                         .padding(4.dp)
                         .clip(CircleShape)
                         .background(Color.Black)

@@ -36,4 +36,19 @@ object Dummy {
         "https://picsum.photos/500/300?random=5",
         "https://picsum.photos/500/300?random=6"
     )
+    val highlight = listOf(
+        "Travel",
+        "Foodie",
+        "Fitness",
+        "Throwback",
+        "Nature",
+    )
+    val CoverUrl = listOf(
+        "https://picsum.photos/500/300?random=10",
+        "https://picsum.photos/500/300?random=20",
+        "https://picsum.photos/500/300?random=30",
+        "https://picsum.photos/500/300?random=40",
+        "https://picsum.photos/500/300?random=50",
+        "https://picsum.photos/500/300?random=60",
+    )
 }

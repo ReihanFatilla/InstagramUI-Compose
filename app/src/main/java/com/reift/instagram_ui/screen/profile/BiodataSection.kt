@@ -23,6 +23,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
+import com.reift.instagram_ui.model.Story
 import com.reift.instagram_ui.screen.home.StoryLazyRow
 import com.reift.instagram_ui.ui.theme.InstagramUITheme
 
@@ -33,6 +34,11 @@ fun BiodataSection() {
         modifier = modifier.padding(horizontal = 16.dp)) {
         StatsRow(modifier)
         BiodataRow(modifier)
+        StoryLazyRow(listStory = Story.listHighlight,
+            profileSize = 70,
+            fontSize = 10,
+            isActive = false
+        )
     }
 }
 

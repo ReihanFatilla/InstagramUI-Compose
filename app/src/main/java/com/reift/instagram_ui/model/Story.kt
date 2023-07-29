@@ -19,5 +19,17 @@ data class Story(
                 }
             }
         }
+        val listHighlight = arrayListOf<Story>().also { list ->
+            repeat(10) {
+                with(Dummy) {
+                    list.add(
+                        Story(
+                            username = highlight.shuffled()[0],
+                            profileUrl = CoverUrl.shuffled()[0]
+                        )
+                    )
+                }
+            }
+        }
     }
 }
