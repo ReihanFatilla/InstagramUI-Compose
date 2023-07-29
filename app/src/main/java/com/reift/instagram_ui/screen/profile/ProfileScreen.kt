@@ -3,7 +3,9 @@ package com.reift.instagram_ui.screen.profile
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.Text
+import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -15,9 +17,7 @@ import com.reift.instagram_ui.ui.theme.InstagramUITheme
 @Composable
 fun ProfileScreen(modifier: Modifier) {
     Column(modifier = modifier) {
-        Box(modifier = modifier, contentAlignment = Alignment.Center) {
-            Text(text = "Profile", textAlign = TextAlign.Center)
-        }
+        ProfileTabBar()
     }
 }
 
