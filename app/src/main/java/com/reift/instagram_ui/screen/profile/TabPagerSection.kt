@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
@@ -30,12 +31,15 @@ import kotlinx.coroutines.launch
 fun TabPagerSection() {
     val pagerState = rememberPagerState(0)
     val scope = rememberCoroutineScope()
-    TabProfile(pagerState){ index ->
-        scope.launch {
-            pagerState.animateScrollToPage(index)
+    Column(modifier = Modifier.fillMaxWidth()) {
+        TabProfile(pagerState){ index ->
+            scope.launch {
+                pagerState.animateScrollToPage(index)
+            }
         }
+        HorizontalPagerProfile(pagerState)
     }
-    HorizontalPagerProfile(pagerState)
+
 }
 
 @OptIn(ExperimentalFoundationApi::class)
