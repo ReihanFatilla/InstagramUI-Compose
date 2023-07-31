@@ -49,7 +49,7 @@ fun MainScreen() {
             ) {
                 navController.navigate(it.route)
             }
-        }
+        },
     ) {
         Navigation(navController = navController)
     }
@@ -84,6 +84,7 @@ fun BottomNavigationBar(
     modifier: Modifier = Modifier,
     onItemClick: (BottomNavItem) -> Unit,
 ) {
+
     val backStackEntry = navController.currentBackStackEntryAsState()
     BottomNavigation(
         modifier = modifier,

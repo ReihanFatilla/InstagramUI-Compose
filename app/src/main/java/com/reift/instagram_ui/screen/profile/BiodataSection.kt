@@ -1,18 +1,22 @@
 package com.reift.instagram_ui.screen.profile
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.pager.PagerState
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.Icon
-import androidx.compose.material.Text
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.outlined.Person
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -26,12 +30,16 @@ import coil.compose.rememberAsyncImagePainter
 import com.reift.instagram_ui.model.Story
 import com.reift.instagram_ui.screen.home.StoryLazyRow
 import com.reift.instagram_ui.ui.theme.InstagramUITheme
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 
 @Composable
 fun BiodataSection() {
-    val modifier = Modifier.fillMaxWidth()
-    Column(verticalArrangement = Arrangement.spacedBy(12.dp),
-        modifier = modifier.padding(horizontal = 16.dp)) {
+    val modifier = Modifier
+        .fillMaxWidth()
+        .padding(horizontal = 16.dp)
+    Column(verticalArrangement = Arrangement.spacedBy(16.dp),
+        modifier = Modifier.fillMaxWidth()) {
         StatsRow(modifier)
         BiodataRow(modifier)
         StoryLazyRow(listStory = Story.listHighlight,
@@ -41,6 +49,8 @@ fun BiodataSection() {
         )
     }
 }
+
+
 
 @Composable
 fun BiodataRow(modifier: Modifier) {
@@ -77,6 +87,7 @@ fun ProfileButton(modifier: Modifier, content: @Composable RowScope.() -> Unit) 
     Button(
         modifier = modifier,
         onClick = { },
+        shape = RoundedCornerShape(10.dp),
         colors = ButtonDefaults.buttonColors(backgroundColor = Color.LightGray),
     ) {
         content()

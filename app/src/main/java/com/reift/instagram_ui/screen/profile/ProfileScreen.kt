@@ -1,23 +1,18 @@
 package com.reift.instagram_ui.screen.profile
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
+import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import com.reift.instagram_ui.screen.home.HomeScreen
+import androidx.compose.ui.unit.dp
 import com.reift.instagram_ui.ui.theme.InstagramUITheme
 
 @Composable
 fun ProfileScreen(modifier: Modifier) {
-    Column(modifier = modifier) {
-        ProfileTabBar()
+    Column(modifier = modifier, verticalArrangement = Arrangement.spacedBy(20.dp)) {
+        ProfileTopBar()
+        BiodataSection()
+        TabPagerSection()
     }
 }
 
