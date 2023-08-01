@@ -49,34 +49,51 @@ fun LazyListScope.FeedsSection() {
 }
 
 @Composable
+fun FeedsComment(post: Post) {
+    Text(text = "View all ${post.listComment.size} comments", fontWeight = FontWeight.Normal, fontSize = 11.sp, color = Color.Gray)
+    Text(text = run {
+        val comment = post.listComment.random()
+        buildAnnotatedString {
+            withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
+                append(comment.user.username)
+            }
+            append("\t${comment.message}")
+        }
+    }, fontSize = 12.sp)
+    Spacer(modifier = Modifier.height(8.dp))
+}
+
+@Composable
 fun FeedsFooter(post: Post, modifier: Modifier) {
     val (expanded, onExpandedChange) = rememberSaveable { mutableStateOf(false) }
     LikedByRow(modifier, post)
-    Row(modifier = modifier.padding(end = 32.dp)) {
-        ReadMoreText(text = run {
-            buildAnnotatedString {
-                withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
-                    append(post.username)
-                }
-                append(" ${post.caption}\n")
-                post.tags.forEach {
-                    withStyle(style = SpanStyle(color = Color.Blue)) {
-                        append("#$it ")
+    Column(modifier = modifier.padding(end = 32.dp), verticalArrangement = Arrangement.spacedBy(2.dp)) {
+        Row(modifier = modifier) {
+            ReadMoreText(text = run {
+                buildAnnotatedString {
+                    withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
+                        append(post.user.username)
+                    }
+                    append(" ${post.caption}\n")
+                    post.tags.forEach {
+                        withStyle(style = SpanStyle(color = Color.Blue)) {
+                            append("#$it ")
+                        }
                     }
                 }
-            }
-        },
-            softWrap = true,
-            readMoreStyle = SpanStyle(color = Color.Gray),
-            readMoreText = "more",
-            fontSize = 12.sp,
-            expanded = expanded,
-            onExpandedChange = onExpandedChange,
-            readMoreMaxLines = 1
-        )
-    }
+            },
+                softWrap = true,
+                readMoreStyle = SpanStyle(color = Color.Gray),
+                readMoreText = "more",
+                fontSize = 12.sp,
+                expanded = expanded,
+                onExpandedChange = onExpandedChange,
+                readMoreMaxLines = 1
+            )
+        }
+        FeedsComment(post = post)
 
-    Spacer(modifier = Modifier.height(8.dp))
+    }
 }
 
 @Composable
@@ -136,7 +153,7 @@ fun FeedsHeader(modifier: Modifier, post: Post) {
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
             Image(
-                painter = rememberAsyncImagePainter(model = post.profileUrl),
+                painter = rememberAsyncImagePainter(model = post.user.profileUrl),
                 contentDescription = null,
                 modifier = Modifier
                     .width(25.dp)
@@ -145,7 +162,7 @@ fun FeedsHeader(modifier: Modifier, post: Post) {
                     .background(Color.Black)
             )
             Spacer(modifier = Modifier.width(8.dp))
-            Text(text = post.username,
+            Text(text = post.user.username,
                 fontSize = 13.sp,
                 color = Color.Black,
                 fontWeight = FontWeight.Bold)
