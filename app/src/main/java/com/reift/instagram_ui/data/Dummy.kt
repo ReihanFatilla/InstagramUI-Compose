@@ -73,10 +73,10 @@ object Dummy {
         "I'm proud of you!",
     )
     val videoUrls = listOf(
-        "https://www.youtube.com/shorts/wlgOUsTlYQU",
-        "https://www.youtube.com/shorts/E2b3S3kn6B0",
-        "https://www.youtube.com/shorts/SIYx4vN-ei4",
-        "https://www.youtube.com/shorts/ZgBOgw5Xq_I",
-        "https://www.youtube.com/shorts/c7c4d37u5_A",
+        "wlgOUsTlYQU",
+        "E2b3S3kn6B0",
+        "SIYx4vN-ei4",
+        "ZgBOgw5Xq_I",
+        "c7c4d37u5_A",
     )
 }
