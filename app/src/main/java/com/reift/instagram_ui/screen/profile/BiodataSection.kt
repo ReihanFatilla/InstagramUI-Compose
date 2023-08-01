@@ -1,22 +1,16 @@
 package com.reift.instagram_ui.screen.profile
 
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.pager.PagerState
-import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.outlined.Person
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -27,11 +21,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
-import com.reift.instagram_ui.model.Story
+import com.reift.instagram_ui.model.User
 import com.reift.instagram_ui.screen.home.StoryLazyRow
 import com.reift.instagram_ui.ui.theme.InstagramUITheme
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.launch
 
 @Composable
 fun BiodataSection() {
@@ -42,7 +34,7 @@ fun BiodataSection() {
         modifier = Modifier.fillMaxWidth()) {
         StatsRow(modifier)
         BiodataRow(modifier)
-        StoryLazyRow(listStory = Story.listHighlight,
+        StoryLazyRow(listUser = User.listHighlight,
             profileSize = 70,
             fontSize = 10,
             isActive = false

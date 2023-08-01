@@ -71,4 +71,7 @@ dependencies {
 
     // Readmore
     implementation 'com.webtoonscorp.android:readmore-material:1.4.2-SNAPSHOT'
+
+    // Android Youtube Player
+    implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:core:11.1.0'
 }

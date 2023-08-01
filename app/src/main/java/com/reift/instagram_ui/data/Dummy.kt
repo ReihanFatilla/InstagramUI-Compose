@@ -1,9 +1,8 @@
 package com.reift.instagram_ui.data
 
-import com.reift.instagram_ui.model.Story
-
 object Dummy {
-    val tags = listOf("Food", "Car", "Sport", "Technology", "Social", "Programming").shuffled().take((0..3).random())
+    val tags = listOf("Food", "Car", "Sport", "Technology", "Social", "Programming").shuffled()
+        .take((0..3).random())
     val caption = listOf(
         "Revving up my taste buds in style! 🚗🍔",
         "Pushing my athletic limits with the help of cutting-edge tech! 🏋️‍♂️🔧",
@@ -50,5 +49,34 @@ object Dummy {
         "https://picsum.photos/500/300?random=40",
         "https://picsum.photos/500/300?random=50",
         "https://picsum.photos/500/300?random=60",
+    )
+    val comments = listOf(
+        "Great work!",
+        "Well done!",
+        "Impressive!",
+        "Fantastic effort!",
+        "You nailed it!",
+        "Awesome job!",
+        "Keep up the good work!",
+        "Outstanding performance!",
+        "Bravo!",
+        "You're doing great!",
+        "You're on fire!",
+        "Incredible!",
+        "Superb!",
+        "You've got this!",
+        "Very impressive!",
+        "I'm amazed!",
+        "You're a star!",
+        "Thumbs up!",
+        "Excellent!",
+        "I'm proud of you!",
+    )
+    val videoUrls = listOf(
+        "https://www.youtube.com/shorts/wlgOUsTlYQU",
+        "https://www.youtube.com/shorts/E2b3S3kn6B0",
+        "https://www.youtube.com/shorts/SIYx4vN-ei4",
+        "https://www.youtube.com/shorts/ZgBOgw5Xq_I",
+        "https://www.youtube.com/shorts/c7c4d37u5_A",
     )
 }

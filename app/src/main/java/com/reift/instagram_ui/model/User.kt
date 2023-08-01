@@ -2,16 +2,16 @@ package com.reift.instagram_ui.model
 
 import com.reift.instagram_ui.data.Dummy
 
-data class Story(
+data class User(
     val username: String,
     val profileUrl: String,
 ) {
     companion object {
-        val listStory = arrayListOf<Story>().also { list ->
+        val listUsers = arrayListOf<User>().also { list ->
             repeat(10) {
                 with(Dummy) {
                     list.add(
-                        Story(
+                        User(
                             username = username.shuffled()[0],
                             profileUrl = profileUrl.shuffled()[0]
                         )
@@ -19,11 +19,11 @@ data class Story(
                 }
             }
         }
-        val listHighlight = arrayListOf<Story>().also { list ->
+        val listHighlight = arrayListOf<User>().also { list ->
             repeat(10) {
                 with(Dummy) {
                     list.add(
-                        Story(
+                        User(
                             username = highlight.shuffled()[0],
                             profileUrl = CoverUrl.shuffled()[0]
                         )

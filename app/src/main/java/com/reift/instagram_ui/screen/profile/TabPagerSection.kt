@@ -63,8 +63,10 @@ private fun TabProfile(
     onClick: (Int) -> Unit,
 ) {
     TabRow(selectedTabIndex = pagerState.currentPage, backgroundColor = Color.White) {
-        listOf(Icons.Default.List,
-            Icons.Default.Person).forEachIndexed { index, imageVector ->
+        listOf(
+            Icons.Default.List,
+            Icons.Default.Person
+        ).forEachIndexed { index, imageVector ->
             Tab(
                 selected = pagerState.currentPage == index,
                 onClick = {

@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Icon
@@ -19,9 +18,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.reift.instagram_ui.model.BottomNavItem
 import com.reift.instagram_ui.screen.explore.ExploreScreen
 import com.reift.instagram_ui.screen.home.HomeScreen
-import com.reift.instagram_ui.model.BottomNavItem
 import com.reift.instagram_ui.screen.post.PostScreen
 import com.reift.instagram_ui.screen.profile.ProfileScreen
 import com.reift.instagram_ui.screen.reels.ReelsScreen
