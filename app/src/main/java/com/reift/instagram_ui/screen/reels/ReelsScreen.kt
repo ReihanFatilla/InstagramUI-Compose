@@ -16,8 +16,8 @@ import com.reift.instagram_ui.ui.theme.InstagramUITheme
 @Composable
 fun ReelsScreen(modifier: Modifier) {
     Box(modifier = modifier) {
-        VerticalPager(pageCount = Reels.listReels.size, modifier = modifier) { index ->
-            ReelsSection(reels = Reels.listReels[index], modifier = modifier)
+        VerticalPager(pageCount = Reels.listReels.size, modifier = Modifier.fillMaxSize()) { index ->
+            ReelsSection(reels = Reels.listReels[index], modifier = Modifier.fillMaxSize())
         }
         ReelsTopBar()
     }
@@ -27,7 +27,6 @@ fun ReelsScreen(modifier: Modifier) {
 fun ReelsSection(reels: Reels, modifier: Modifier) {
     Box(modifier = modifier) {
         YoutubeScreen(reels = reels, modifier = modifier)
-
         ReelsOverlay(reels = reels)
 
     }

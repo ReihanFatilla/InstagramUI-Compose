@@ -5,11 +5,12 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Icon
 import androidx.compose.material.Scaffold
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
@@ -19,6 +20,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.google.accompanist.systemuicontroller.SystemUiController
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.reift.instagram_ui.model.BottomNavItem
 import com.reift.instagram_ui.screen.explore.ExploreScreen
 import com.reift.instagram_ui.screen.home.HomeScreen
@@ -32,14 +35,21 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             InstagramUITheme {
-                MainScreen()
+                val systemUiController = rememberSystemUiController()
+                SideEffect {
+                    systemUiController.setStatusBarColor(
+                        color = Color.White,
+                        darkIcons = true
+                    )
+                }
+                MainScreen(systemUiController)
             }
         }
     }
 }
 
 @Composable
-fun MainScreen() {
+fun MainScreen(systemUiController: SystemUiController) {
     val navController = rememberNavController()
     Scaffold(
         bottomBar = {
@@ -48,18 +58,34 @@ fun MainScreen() {
                 navController = navController,
             ) {
                 navController.navigate(it.route)
+                isDarkMode(it.route, systemUiController)
             }
         },
-    ) {
-        it.toString()
-        Navigation(navController = navController)
+    ) { paddingValues ->
+        Navigation(navController = navController, modifier = Modifier.fillMaxSize().padding(paddingValues = paddingValues))
     }
 }
 
+fun isDarkMode(route: String, systemUiController: SystemUiController): Boolean {
+    val isDarkMode = route == BottomNavItem.ROUTE_REELS
+    if (isDarkMode) {
+        systemUiController.setStatusBarColor(
+            color = Color.Black,
+            darkIcons = false
+        )
+
+    } else {
+        systemUiController.setStatusBarColor(
+            color = Color.White,
+            darkIcons = true
+        )
+    }
+    return isDarkMode
+}
+
 @Composable
-fun Navigation(navController: NavHostController) {
+fun Navigation(navController: NavHostController, modifier: Modifier) {
     NavHost(navController = navController, startDestination = BottomNavItem.ROUTE_HOME) {
-        val modifier = Modifier.fillMaxSize()
         composable(BottomNavItem.ROUTE_HOME) {
             HomeScreen(modifier)
         }
@@ -83,23 +109,23 @@ fun BottomNavigationBar(
     item: List<BottomNavItem>,
     navController: NavHostController,
     modifier: Modifier = Modifier,
-    onItemClick: (BottomNavItem) -> Unit,
+    onItemClick: (BottomNavItem) -> Boolean,
 ) {
-
+    var isDark by remember { mutableStateOf(false) }
     val backStackEntry = navController.currentBackStackEntryAsState()
     BottomNavigation(
         modifier = modifier,
-        backgroundColor = Color.White,
+        backgroundColor = if (isDark) Color.Black else Color.White,
         elevation = 2.dp
     ) {
         item.forEach {
             val selectedItem = it.route == backStackEntry.value?.destination?.route
             BottomNavigationItem(selected = selectedItem,
                 onClick = {
-                    onItemClick(it)
+                    isDark = onItemClick(it)
                 },
-                selectedContentColor = Color.Black,
-                unselectedContentColor = Color.LightGray,
+                selectedContentColor = if (isDark) Color.White else Color.Black,
+                unselectedContentColor = if (isDark) Color.DarkGray else Color.LightGray,
                 icon = {
                     Icon(imageVector = it.icon, contentDescription = null)
                 }
@@ -108,10 +134,18 @@ fun BottomNavigationBar(
     }
 }
 
+
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
     InstagramUITheme {
-        MainScreen()
+        val systemUiController = rememberSystemUiController()
+        SideEffect {
+            systemUiController.setStatusBarColor(
+                color = Color.White,
+                darkIcons = false
+            )
+        }
+        MainScreen(systemUiController)
     }
 }

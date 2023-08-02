@@ -74,4 +74,7 @@ dependencies {
 
     // Android Youtube Player
     implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:core:11.1.0'
+
+    // system bars customization
+    implementation "com.google.accompanist:accompanist-systemuicontroller:0.30.1"
 }
