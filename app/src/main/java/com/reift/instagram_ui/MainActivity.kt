@@ -3,6 +3,7 @@ package com.reift.instagram_ui
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
@@ -50,6 +51,7 @@ fun MainScreen() {
             }
         },
     ) {
+        it.toString()
         Navigation(navController = navController)
     }
 }
@@ -68,7 +70,7 @@ fun Navigation(navController: NavHostController) {
             PostScreen(modifier)
         }
         composable(BottomNavItem.ROUTE_REELS) {
-            ReelsScreen(modifier)
+            ReelsScreen(modifier.background(Color.Black))
         }
         composable(BottomNavItem.ROUTE_PROFILE) {
             ProfileScreen(modifier)

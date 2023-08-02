@@ -5,7 +5,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.pager.VerticalPager
-import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -17,7 +16,7 @@ import com.reift.instagram_ui.ui.theme.InstagramUITheme
 @Composable
 fun ReelsScreen(modifier: Modifier) {
     Box(modifier = modifier) {
-        VerticalPager(pageCount = 2, modifier = modifier) { index ->
+        VerticalPager(pageCount = Reels.listReels.size, modifier = modifier) { index ->
             ReelsSection(reels = Reels.listReels[index], modifier = modifier)
         }
         ReelsTopBar()
@@ -27,10 +26,10 @@ fun ReelsScreen(modifier: Modifier) {
 @Composable
 fun ReelsSection(reels: Reels, modifier: Modifier) {
     Box(modifier = modifier) {
-        YoutubeScreen(videoId = reels.youtubeUrl, modifier = modifier)
-        Surface(color = Color.Transparent) {
-            ReelsOverlay(reels = reels)
-        }
+        YoutubeScreen(reels = reels, modifier = modifier)
+
+        ReelsOverlay(reels = reels)
+
     }
 }
 
