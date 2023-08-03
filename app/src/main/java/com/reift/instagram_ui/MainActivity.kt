@@ -50,14 +50,21 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun MainScreen(systemUiController: SystemUiController) {
     val navController = rememberNavController()
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentRoute = navBackStackEntry?.destination?.route
     Scaffold(
         bottomBar = {
-            BottomNavigationBar(
-                item = BottomNavItem.listNavItem,
-                navController = navController,
-            ) {
-                navController.navigate(it.route)
-                isDarkMode(it.route, systemUiController)
+            if (!currentRoute.orEmpty().contains("storyscreen")) {
+                darkMode(true, systemUiController)
+                BottomNavigationBar(
+                    item = BottomNavItem.listNavItem,
+                    navController = navController,
+                ) {
+                    navController.navigate(it.route)
+                    isDarkMode(it.route, systemUiController)
+                }
+            } else {
+                darkMode(true, systemUiController)
             }
         },
     ) { paddingValues ->
@@ -69,26 +76,22 @@ fun MainScreen(systemUiController: SystemUiController) {
 
 fun isDarkMode(route: String, systemUiController: SystemUiController): Boolean {
     val isDarkMode = route == BottomNavItem.ROUTE_REELS
-    if (isDarkMode) {
-        systemUiController.setStatusBarColor(
-            color = Color.Black,
-            darkIcons = false
-        )
-
-    } else {
-        systemUiController.setStatusBarColor(
-            color = Color.White,
-            darkIcons = true
-        )
-    }
+    darkMode(isDarkMode, systemUiController)
     return isDarkMode
+}
+
+fun darkMode(isDark: Boolean, systemUiController: SystemUiController){
+    systemUiController.setStatusBarColor(
+        color = if(isDark) Color.Black else Color.Black,
+        darkIcons = !isDark
+    )
 }
 
 @Composable
 fun Navigation(navController: NavHostController, modifier: Modifier) {
     NavHost(navController = navController, startDestination = BottomNavItem.ROUTE_HOME) {
         composable(BottomNavItem.ROUTE_HOME) {
-            HomeScreen(modifier){
+            HomeScreen(modifier) {
                 navController.navigate("storyscreen/${it}")
             }
         }
@@ -100,7 +103,7 @@ fun Navigation(navController: NavHostController, modifier: Modifier) {
                     defaultValue = 0
                 }
             )
-        ){
+        ) {
             StoryScreen(
                 it.arguments?.getInt("index") ?: 0,
                 Modifier.fillMaxSize()
