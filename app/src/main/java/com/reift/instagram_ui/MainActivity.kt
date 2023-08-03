@@ -16,15 +16,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.currentBackStackEntryAsState
-import androidx.navigation.compose.rememberNavController
+import androidx.navigation.NavType
+import androidx.navigation.compose.*
 import com.google.accompanist.systemuicontroller.SystemUiController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.reift.instagram_ui.model.BottomNavItem
 import com.reift.instagram_ui.screen.explore.ExploreScreen
 import com.reift.instagram_ui.screen.home.HomeScreen
+import com.reift.instagram_ui.screen.home.screen.story.StoryScreen
 import com.reift.instagram_ui.screen.post.PostScreen
 import com.reift.instagram_ui.screen.profile.ProfileScreen
 import com.reift.instagram_ui.screen.reels.ReelsScreen
@@ -62,7 +61,9 @@ fun MainScreen(systemUiController: SystemUiController) {
             }
         },
     ) { paddingValues ->
-        Navigation(navController = navController, modifier = Modifier.fillMaxSize().padding(paddingValues = paddingValues))
+        Navigation(navController = navController, modifier = Modifier
+            .fillMaxSize()
+            .padding(paddingValues = paddingValues))
     }
 }
 
@@ -87,7 +88,22 @@ fun isDarkMode(route: String, systemUiController: SystemUiController): Boolean {
 fun Navigation(navController: NavHostController, modifier: Modifier) {
     NavHost(navController = navController, startDestination = BottomNavItem.ROUTE_HOME) {
         composable(BottomNavItem.ROUTE_HOME) {
-            HomeScreen(modifier)
+            HomeScreen(modifier){
+                navController.navigate("storyscreen/${it}")
+            }
+        }
+        composable(
+            route = "storyscreen/{index}",
+            arguments = listOf(
+                navArgument("index") {
+                    type = NavType.IntType
+                    defaultValue = 0
+                }
+            )
+        ){
+            StoryScreen(
+                it.arguments?.getInt("index") ?: 0
+            )
         }
         composable(BottomNavItem.ROUTE_EXPLORE) {
             ExploreScreen(modifier)

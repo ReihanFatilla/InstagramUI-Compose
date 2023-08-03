@@ -3,6 +3,7 @@ package com.reift.instagram_ui.screen.home
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.LazyRow
@@ -23,18 +24,26 @@ import com.reift.instagram_ui.model.Story
 import com.reift.instagram_ui.model.User
 
 
-fun LazyListScope.StorySection() {
+fun LazyListScope.StorySection(onStoryClick: (Int) -> Unit) {
     item {
-        StoryLazyRow(listUser = Story.listStory, profileSize = 90, fontSize = 12, isActive = true)
+        StoryLazyRow(listUser = Story.listStory, profileSize = 90, fontSize = 12, isActive = true, onStoryClick)
     }
 }
 
 @Composable
-fun StoryLazyRow(listUser: List<Story>, profileSize: Int, fontSize: Int, isActive: Boolean){
+fun StoryLazyRow(
+    listUser: List<Story>,
+    profileSize: Int,
+    fontSize: Int,
+    isActive: Boolean,
+    onStoryClick: (Int) -> Unit
+){
     LazyRow(horizontalArrangement = Arrangement.spacedBy(16.dp),
         contentPadding = PaddingValues(horizontal = 16.dp)) {
         items(listUser) { story ->
-            Column(modifier = Modifier.width(profileSize.dp)) {
+            Column(modifier = Modifier.width(profileSize.dp).clickable {
+                onStoryClick(listUser.indexOf(story))
+            }) {
                 Image(
                     painter = rememberAsyncImagePainter(model = story.user.profileUrl),
                     contentDescription = null,
@@ -46,7 +55,6 @@ fun StoryLazyRow(listUser: List<Story>, profileSize: Int, fontSize: Int, isActiv
                         .padding(4.dp)
                         .clip(CircleShape)
                         .background(Color.Black)
-
                 )
                 Text(text = story.user.username,
                     fontSize = fontSize.sp,

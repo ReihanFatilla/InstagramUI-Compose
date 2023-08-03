@@ -22,7 +22,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
 import com.reift.instagram_ui.model.Story
-import com.reift.instagram_ui.model.User
 import com.reift.instagram_ui.screen.home.StoryLazyRow
 import com.reift.instagram_ui.ui.theme.InstagramUITheme
 
@@ -38,7 +37,8 @@ fun BiodataSection() {
         StoryLazyRow(listUser = Story.listHighlight,
             profileSize = 70,
             fontSize = 10,
-            isActive = false
+            isActive = false,
+            onStoryClick = onStoryClick
         )
     }
 }

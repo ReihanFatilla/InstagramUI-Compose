@@ -9,6 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.reift.instagram_ui.model.Story
 import com.reift.instagram_ui.model.User
 import com.reift.instagram_ui.screen.home.screen.comment.CommentBottomSheet
 import com.reift.instagram_ui.ui.theme.InstagramUITheme
@@ -17,12 +18,12 @@ import com.reift.instagram_ui.ui.theme.InstagramUITheme
 @Composable
 fun HomeScreen(
     modifier: Modifier,
-    onStoryClick: (List<User>) -> Unit
+    onStoryClick: (Int) -> Unit
 ) {
     CommentBottomSheet(modifier = modifier) { CommentListener ->
         LazyColumn(verticalArrangement = Arrangement.spacedBy(16.dp), modifier = modifier) {
             HomeTopBar()
-            StorySection()
+            StorySection(onStoryClick)
             FeedsSection(CommentListener)
         }
     }
