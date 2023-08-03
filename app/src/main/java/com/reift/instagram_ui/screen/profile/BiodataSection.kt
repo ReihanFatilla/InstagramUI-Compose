@@ -38,7 +38,7 @@ fun BiodataSection() {
             profileSize = 70,
             fontSize = 10,
             isActive = false,
-            onStoryClick = onStoryClick
+            onStoryClick = {}
         )
     }
 }

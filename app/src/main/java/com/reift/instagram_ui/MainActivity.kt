@@ -102,7 +102,8 @@ fun Navigation(navController: NavHostController, modifier: Modifier) {
             )
         ){
             StoryScreen(
-                it.arguments?.getInt("index") ?: 0
+                it.arguments?.getInt("index") ?: 0,
+                Modifier.fillMaxSize()
             )
         }
         composable(BottomNavItem.ROUTE_EXPLORE) {
