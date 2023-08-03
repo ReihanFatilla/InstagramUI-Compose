@@ -8,7 +8,7 @@ data class User(
 ) {
     companion object {
         val listUsers = arrayListOf<User>().also { list ->
-            repeat(10) {
+            repeat(15) {
                 with(Dummy) {
                     list.add(
                         User(
@@ -19,17 +19,6 @@ data class User(
                 }
             }
         }
-        val listHighlight = arrayListOf<User>().also { list ->
-            repeat(10) {
-                with(Dummy) {
-                    list.add(
-                        User(
-                            username = highlight.shuffled()[0],
-                            profileUrl = CoverUrl.shuffled()[0]
-                        )
-                    )
-                }
-            }
-        }
+
     }
 }

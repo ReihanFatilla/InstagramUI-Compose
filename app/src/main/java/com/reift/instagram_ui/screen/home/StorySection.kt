@@ -19,23 +19,24 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
+import com.reift.instagram_ui.model.Story
 import com.reift.instagram_ui.model.User
 
 
 fun LazyListScope.StorySection() {
     item {
-        StoryLazyRow(listUser = User.listUsers, profileSize = 90, fontSize = 12, isActive = true)
+        StoryLazyRow(listUser = Story.listStory, profileSize = 90, fontSize = 12, isActive = true)
     }
 }
 
 @Composable
-fun StoryLazyRow(listUser: List<User>, profileSize: Int, fontSize: Int, isActive: Boolean){
+fun StoryLazyRow(listUser: List<Story>, profileSize: Int, fontSize: Int, isActive: Boolean){
     LazyRow(horizontalArrangement = Arrangement.spacedBy(16.dp),
         contentPadding = PaddingValues(horizontal = 16.dp)) {
         items(listUser) { story ->
             Column(modifier = Modifier.width(profileSize.dp)) {
                 Image(
-                    painter = rememberAsyncImagePainter(model = story.profileUrl),
+                    painter = rememberAsyncImagePainter(model = story.user.profileUrl),
                     contentDescription = null,
                     modifier = Modifier
                         .fillMaxWidth()
@@ -47,7 +48,7 @@ fun StoryLazyRow(listUser: List<User>, profileSize: Int, fontSize: Int, isActive
                         .background(Color.Black)
 
                 )
-                Text(text = story.username,
+                Text(text = story.user.username,
                     fontSize = fontSize.sp,
                     color = Color.Black,
                     maxLines = 1,
