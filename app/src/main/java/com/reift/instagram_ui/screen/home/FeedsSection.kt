@@ -3,13 +3,13 @@ package com.reift.instagram_ui.screen.home
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.Icon
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.outlined.Done
@@ -32,25 +32,28 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
+import com.reift.instagram_ui.`interface`.CommentListener
 import com.reift.instagram_ui.model.Post
 import com.reift.instagram_ui.ui.theme.InstagramUITheme
 import com.webtoonscorp.android.readmore.material.ReadMoreText
 
-fun LazyListScope.FeedsSection() {
+fun LazyListScope.FeedsSection(commentListener: CommentListener) {
     items(Post.listPost) { post ->
         val modifier = Modifier.fillMaxWidth()
         Column(verticalArrangement = Arrangement.spacedBy(8.dp),
             modifier = modifier.padding(horizontal = 16.dp)) {
             FeedsHeader(post = post, modifier = modifier)
-            FeedsContent(post = post, modifier = modifier)
-            FeedsFooter(post = post, modifier = modifier)
+            FeedsContent(post = post, modifier = modifier, commentListener = commentListener)
+            FeedsFooter(post = post, modifier = modifier, commentListener = commentListener)
         }
     }
 }
 
 @Composable
-fun FeedsComment(post: Post) {
-    Text(text = "View all ${post.listComment.size} comments", fontWeight = FontWeight.Normal, fontSize = 11.sp, color = Color.Gray)
+fun FeedsComment(post: Post, commentListener: CommentListener) {
+    Text(text = "View all ${post.listComment.size} comments", fontWeight = FontWeight.Normal, fontSize = 11.sp, color = Color.Gray, modifier = Modifier.clickable {
+        commentListener.onClick()
+    })
     Text(text = run {
         val comment = post.listComment.random()
         buildAnnotatedString {
@@ -64,7 +67,7 @@ fun FeedsComment(post: Post) {
 }
 
 @Composable
-fun FeedsFooter(post: Post, modifier: Modifier) {
+fun FeedsFooter(post: Post, modifier: Modifier, commentListener: CommentListener) {
     val (expanded, onExpandedChange) = rememberSaveable { mutableStateOf(false) }
     LikedByRow(modifier, post)
     Column(modifier = modifier.padding(end = 32.dp), verticalArrangement = Arrangement.spacedBy(2.dp)) {
@@ -91,7 +94,7 @@ fun FeedsFooter(post: Post, modifier: Modifier) {
                 readMoreMaxLines = 1
             )
         }
-        FeedsComment(post = post)
+        FeedsComment(post = post, commentListener = commentListener)
 
     }
 }
@@ -121,7 +124,7 @@ fun LikedByRow(modifier: Modifier, post: Post) {
 }
 
 @Composable
-fun FeedsContent(post: Post, modifier: Modifier) {
+fun FeedsContent(post: Post, modifier: Modifier, commentListener: CommentListener) {
     Image(painter = rememberAsyncImagePainter(model = post.imageUrl),
         contentDescription = null,
         modifier = Modifier
@@ -138,7 +141,9 @@ fun FeedsContent(post: Post, modifier: Modifier) {
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Icon(imageVector = Icons.Outlined.FavoriteBorder, contentDescription = null)
-            Icon(imageVector = Icons.Outlined.Email, contentDescription = null)
+            Icon(imageVector = Icons.Outlined.Email, contentDescription = null, modifier = Modifier.clickable {
+                commentListener.onClick()
+            })
             Icon(imageVector = Icons.Outlined.Share, contentDescription = null)
         }
         Icon(imageVector = Icons.Outlined.Done, contentDescription = null)
@@ -171,12 +176,16 @@ fun FeedsHeader(modifier: Modifier, post: Post) {
     }
 }
 
+
 @Preview(showBackground = true)
 @Composable
 fun FeedsPreview() {
     InstagramUITheme {
         LazyColumn(modifier = Modifier.fillMaxSize()) {
-            FeedsSection()
+            FeedsSection((object: CommentListener{
+                override fun onClick() {
+                }
+            }))
         }
     }
 }

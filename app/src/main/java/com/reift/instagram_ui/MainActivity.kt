@@ -143,7 +143,7 @@ fun DefaultPreview() {
         SideEffect {
             systemUiController.setStatusBarColor(
                 color = Color.White,
-                darkIcons = false
+                darkIcons = true
             )
         }
         MainScreen(systemUiController)
