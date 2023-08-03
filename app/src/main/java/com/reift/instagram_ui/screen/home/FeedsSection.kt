@@ -33,6 +33,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
 import com.reift.instagram_ui.`interface`.CommentListener
+import com.reift.instagram_ui.model.Comment
 import com.reift.instagram_ui.model.Post
 import com.reift.instagram_ui.ui.theme.InstagramUITheme
 import com.webtoonscorp.android.readmore.material.ReadMoreText
@@ -52,7 +53,7 @@ fun LazyListScope.FeedsSection(commentListener: CommentListener) {
 @Composable
 fun FeedsComment(post: Post, commentListener: CommentListener) {
     Text(text = "View all ${post.listComment.size} comments", fontWeight = FontWeight.Normal, fontSize = 11.sp, color = Color.Gray, modifier = Modifier.clickable {
-        commentListener.onClick()
+        commentListener.onClick(post.listComment)
     })
     Text(text = run {
         val comment = post.listComment.random()
@@ -142,7 +143,7 @@ fun FeedsContent(post: Post, modifier: Modifier, commentListener: CommentListene
         ) {
             Icon(imageVector = Icons.Outlined.FavoriteBorder, contentDescription = null)
             Icon(imageVector = Icons.Outlined.Email, contentDescription = null, modifier = Modifier.clickable {
-                commentListener.onClick()
+                commentListener.onClick(post.listComment)
             })
             Icon(imageVector = Icons.Outlined.Share, contentDescription = null)
         }
@@ -183,7 +184,7 @@ fun FeedsPreview() {
     InstagramUITheme {
         LazyColumn(modifier = Modifier.fillMaxSize()) {
             FeedsSection((object: CommentListener{
-                override fun onClick() {
+                override fun onClick(listComment: List<Comment>) {
                 }
             }))
         }
