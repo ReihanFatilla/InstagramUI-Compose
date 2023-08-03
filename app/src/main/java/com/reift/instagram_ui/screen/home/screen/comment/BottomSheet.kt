@@ -33,7 +33,7 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun CommentBottomSheet(content: @Composable (CommentListener) -> Unit) {
+fun CommentBottomSheet(modifier: Modifier,content: @Composable (CommentListener) -> Unit) {
     var commentLiveData = MutableLiveData<List<Comment>>()
     val sheetState = rememberModalBottomSheetState(
         initialValue = ModalBottomSheetValue.Hidden,
@@ -56,7 +56,7 @@ fun CommentBottomSheet(content: @Composable (CommentListener) -> Unit) {
 
     ModalBottomSheetLayout(
         sheetState = sheetState,
-        sheetContent = { CommentScreen(Modifier.fillMaxSize(), commentLiveData) },
+        sheetContent = { CommentScreen(modifier, commentLiveData) },
         modifier = Modifier.fillMaxSize(),
         content = { content(commentListener) }
     )
@@ -68,7 +68,7 @@ fun CommentScreen(modifier: Modifier, commentLiveData: LiveData<List<Comment>>) 
         modifier = modifier,
         backgroundColor = Color.White,
         shape = RoundedCornerShape(topStart = 25.dp, topEnd = 25.dp)) {
-        Box(modifier = modifier) {
+        Box(modifier = Modifier.fillMaxSize()) {
             Column(
                 verticalArrangement = Arrangement.spacedBy(16.dp),
                 modifier = Modifier
