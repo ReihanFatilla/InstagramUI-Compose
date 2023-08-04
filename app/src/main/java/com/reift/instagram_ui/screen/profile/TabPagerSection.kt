@@ -1,10 +1,9 @@
 package com.reift.instagram_ui.screen.profile
 
-import android.util.Log
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
@@ -12,7 +11,6 @@ import androidx.compose.material.Icon
 import androidx.compose.material.Tab
 import androidx.compose.material.TabRow
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.runtime.Composable
@@ -23,35 +21,33 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.reift.instagram_ui.screen.profile.screen.MyPostScreen
 import com.reift.instagram_ui.screen.profile.screen.TagScreen
 import com.reift.instagram_ui.ui.theme.InstagramUITheme
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalFoundationApi::class)
-@Composable
-fun TabPagerSection() {
-    val pagerState = rememberPagerState(0)
-    val scope = rememberCoroutineScope()
-    Column(modifier = Modifier.fillMaxWidth()) {
-        TabProfile(pagerState){ index ->
+fun LazyListScope.TabPagerSection(pagerState: PagerState) {
+    stickyHeader {
+        val scope = rememberCoroutineScope()
+        TabProfile(pagerState) { index ->
             scope.launch {
                 pagerState.animateScrollToPage(index)
             }
         }
+    }
+    item {
         HorizontalPagerProfile(pagerState)
     }
+
 
 }
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun HorizontalPagerProfile(pagerState: PagerState) {
-    HorizontalPager(pageCount = 2, state = pagerState){ index ->
-        val modifier = Modifier.fillMaxSize()
-        Column(modifier = modifier) {
-            when(index){
-                0 -> MyPostScreen(modifier = modifier)
-                1 -> TagScreen(modifier = modifier)
-            }
+    HorizontalPager(pageCount = 2, state = pagerState) { index ->
+        val modifier = Modifier.fillMaxWidth()
+        when (index) {
+            0 -> MyPostScreen(modifier = modifier)
+            1 -> TagScreen(modifier = modifier)
         }
     }
 }
@@ -80,10 +76,14 @@ private fun TabProfile(
     }
 }
 
+@OptIn(ExperimentalFoundationApi::class)
 @Preview(showBackground = true)
 @Composable
 fun TabPagerPreview() {
     InstagramUITheme {
-        TabPagerSection()
+        val pagerState = rememberPagerState()
+        LazyColumn {
+            TabPagerSection(pagerState)
+        }
     }
 }

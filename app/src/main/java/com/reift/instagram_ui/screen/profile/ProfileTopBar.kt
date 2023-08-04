@@ -1,5 +1,6 @@
 package com.reift.instagram_ui.screen.profile
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -26,8 +27,8 @@ import com.reift.instagram_ui.ui.theme.InstagramUITheme
 fun ProfileTopBar() {
     Row(modifier = Modifier
         .fillMaxWidth()
-        .padding(horizontal = 16.dp)
-        .padding(top = 16.dp),
+        .background(Color.White)
+        .padding(horizontal = 16.dp, vertical = 16.dp),
         horizontalArrangement = Arrangement.SpaceBetween,) {
         LeadingIcon()
         ActionIcon()

@@ -4,6 +4,8 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -25,21 +27,22 @@ import com.reift.instagram_ui.model.Story
 import com.reift.instagram_ui.screen.home.StoryLazyRow
 import com.reift.instagram_ui.ui.theme.InstagramUITheme
 
-@Composable
-fun BiodataSection() {
-    val modifier = Modifier
-        .fillMaxWidth()
-        .padding(horizontal = 16.dp)
-    Column(verticalArrangement = Arrangement.spacedBy(16.dp),
-        modifier = Modifier.fillMaxWidth()) {
-        StatsRow(modifier)
-        BiodataRow(modifier)
-        StoryLazyRow(listUser = Story.listHighlight,
-            profileSize = 70,
-            fontSize = 10,
-            isActive = false,
-            onStoryClick = {}
-        )
+fun LazyListScope.BiodataSection() {
+    item {
+        val modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp)
+        Column(verticalArrangement = Arrangement.spacedBy(16.dp),
+            modifier = Modifier.fillMaxWidth().padding(top = 16.dp)) {
+            StatsRow(modifier)
+            BiodataRow(modifier)
+            StoryLazyRow(listUser = Story.listHighlight,
+                profileSize = 70,
+                fontSize = 10,
+                isActive = false,
+                onStoryClick = {}
+            )
+        }
     }
 }
 
@@ -150,6 +153,8 @@ private fun StatsColumn(count: String, title: String) {
 @Composable
 fun ProfileBioDataPreview() {
     InstagramUITheme {
-        BiodataSection()
+        LazyColumn {
+            BiodataSection()
+        }
     }
 }
