@@ -2,6 +2,7 @@ package com.reift.instagram_ui.screen.home.screen.story
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Icon
@@ -21,7 +22,7 @@ import coil.compose.rememberAsyncImagePainter
 import com.reift.instagram_ui.model.Story
 
 @Composable
-fun StoryHeader(story: Story) {
+fun StoryHeader(story: Story, navigateBack: () -> Unit) {
     Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
         Row(
             verticalAlignment = Alignment.CenterVertically
@@ -44,7 +45,9 @@ fun StoryHeader(story: Story) {
         Row {
             Icon(imageVector = Icons.Default.Menu, contentDescription = null, tint = Color.White)
             Spacer(modifier = Modifier.width(12.dp))
-            Icon(imageVector = Icons.Default.Close, contentDescription = null, tint = Color.White)
+            Icon(imageVector = Icons.Default.Close, contentDescription = null, tint = Color.White, modifier = Modifier.clickable {
+                navigateBack()
+            })
         }
     }
 }

@@ -9,6 +9,7 @@ import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
@@ -18,10 +19,10 @@ import com.reift.instagram_ui.utils.storySwipeAnimation
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun StoryScreen(index: Int, modifier: Modifier) {
+fun StoryScreen(index: Int, modifier: Modifier, navigateBack: () -> Unit) {
     val pagerState = rememberPagerState(index)
     HorizontalPager(
-        modifier = modifier,
+        modifier = modifier.background(Color.Black),
         pageCount = Story.listStory.size,
         state = pagerState
     ) { page ->
@@ -31,6 +32,7 @@ fun StoryScreen(index: Int, modifier: Modifier) {
             Image(
                 painter = rememberAsyncImagePainter(model = story.imageUrl),
                 contentDescription = null,
+                contentScale = ContentScale.Crop,
                 modifier = modifier
                     .background(Color.Black)
             )
@@ -38,7 +40,7 @@ fun StoryScreen(index: Int, modifier: Modifier) {
                 modifier = modifier.padding(16.dp),
                 verticalArrangement = Arrangement.SpaceBetween
             ) {
-                StoryHeader(story)
+                StoryHeader(story, navigateBack)
                 StoryFooter()
             }
         }
@@ -49,6 +51,8 @@ fun StoryScreen(index: Int, modifier: Modifier) {
 @Composable
 fun StoryScreenPreview() {
     InstagramUITheme {
-        StoryScreen(modifier = Modifier.fillMaxSize(), index = 0)
+        StoryScreen(index = 0, modifier = Modifier.fillMaxSize()) {
+
+        }
     }
 }

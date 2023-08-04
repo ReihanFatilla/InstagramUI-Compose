@@ -19,22 +19,34 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun StoryFooter() {
     var text by remember { mutableStateOf("") }
-    Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(16.dp)) {
+    Row(modifier = Modifier.fillMaxWidth(),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(16.dp)) {
         OutlinedTextField(
             value = text,
             onValueChange = { newText -> text = newText },
-            colors = TextFieldDefaults.outlinedTextFieldColors(unfocusedBorderColor = Color.White, focusedBorderColor = Color.White),
+            colors = TextFieldDefaults.outlinedTextFieldColors(unfocusedBorderColor = Color.White,
+                focusedBorderColor = Color.White),
             shape = RoundedCornerShape(20.dp),
             modifier = Modifier
                 .height(50.dp),
             trailingIcon = {
-                Icon(imageVector = Icons.Outlined.Face,
-                    contentDescription = null)
+                Icon(
+                    imageVector = Icons.Outlined.Face,
+                    contentDescription = null,
+                    tint = Color.White
+                )
             },
             placeholder = {
-                Text(text = "Send message...", color = Color.Gray)
+                Text(text = "Send message...", color = Color.White)
             })
-        Icon(imageVector = Icons.Outlined.Share, contentDescription = null, tint = Color.White, modifier = Modifier.size(28.dp))
-        Icon(imageVector = Icons.Outlined.FavoriteBorder, contentDescription = null, tint = Color.White, modifier = Modifier.size(28.dp))
+        Icon(imageVector = Icons.Outlined.Share,
+            contentDescription = null,
+            tint = Color.White,
+            modifier = Modifier.size(28.dp))
+        Icon(imageVector = Icons.Outlined.FavoriteBorder,
+            contentDescription = null,
+            tint = Color.White,
+            modifier = Modifier.size(28.dp))
     }
 }
